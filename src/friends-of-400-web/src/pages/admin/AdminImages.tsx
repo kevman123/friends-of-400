@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import Container from '../../components/ui/Container';
+import Modal from '../../components/ui/Modal';
 import { getAdminImages, uploadAdminImage, deleteAdminImage } from '../../services/api';
 import type { AdminImage } from '../../types';
 
@@ -12,6 +13,7 @@ export default function AdminImages() {
   const [altText, setAltText] = useState('');
   const [category, setCategory] = useState('general');
   const [dragOver, setDragOver] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<AdminImage | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -143,14 +145,14 @@ export default function AdminImages() {
               key={img.id}
               className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group"
             >
-              <div className="aspect-video bg-gray-100 relative">
+              <div className="aspect-video bg-gray-100 relative cursor-pointer" onClick={() => setSelectedImage(img)}>
                 <img
                   src={img.url}
                   alt={img.altText || img.fileName}
                   className="w-full h-full object-cover"
                 />
                 <button
-                  onClick={() => handleDelete(img.id)}
+                  onClick={(e) => { e.stopPropagation(); handleDelete(img.id); }}
                   className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-7 h-7 flex items-center justify-center text-sm opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer hover:bg-red-600"
                   title="Delete image"
                 >
@@ -170,6 +172,38 @@ export default function AdminImages() {
           ))}
         </div>
       )}
+
+      {/* Full image modal */}
+      <Modal isOpen={!!selectedImage} onClose={() => setSelectedImage(null)} className="max-w-2xl">
+        {selectedImage && (
+          <div>
+            <img
+              src={selectedImage.url}
+              alt={selectedImage.altText || selectedImage.fileName}
+              className="w-full rounded-t-2xl"
+            />
+            <div className="p-5">
+              <p className="font-medium text-gray-900">{selectedImage.altText || selectedImage.fileName}</p>
+              <div className="flex items-center gap-2 mt-1 text-sm text-gray-500">
+                <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-700 capitalize">
+                  {selectedImage.category}
+                </span>
+                <span>{selectedImage.uploadedAt}</span>
+              </div>
+              <a
+                href={selectedImage.url}
+                download={selectedImage.fileName}
+                className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-brand-green text-white text-sm font-medium rounded-lg hover:bg-green-600 transition-colors no-underline"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
+                </svg>
+                Download
+              </a>
+            </div>
+          </div>
+        )}
+      </Modal>
     </Container>
   );
 }

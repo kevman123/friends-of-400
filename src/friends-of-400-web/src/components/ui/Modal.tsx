@@ -5,9 +5,10 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+  className?: string;
 }
 
-export default function Modal({ isOpen, onClose, children }: ModalProps) {
+export default function Modal({ isOpen, onClose, children, className }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -41,7 +42,7 @@ export default function Modal({ isOpen, onClose, children }: ModalProps) {
         ref={contentRef}
         role="dialog"
         aria-modal="true"
-        className="bg-white rounded-2xl shadow-xl max-w-md w-full max-h-[90vh] overflow-y-auto relative"
+        className={`bg-white rounded-2xl shadow-xl w-full max-h-[90vh] overflow-y-auto relative ${className ?? 'max-w-md'}`}
       >
         <button
           onClick={onClose}

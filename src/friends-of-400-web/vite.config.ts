@@ -12,6 +12,11 @@ export default defineConfig({
         secure: false,
         xfwd: true,
       },
+      '/uploads': {
+        target: process.env.services__api__https__0 ?? process.env.services__api__http__0 ?? 'http://localhost:5000',
+        secure: false,
+        xfwd: true,
+      },
     },
   },
 })
