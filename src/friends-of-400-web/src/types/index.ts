@@ -32,3 +32,36 @@ export interface DonationCategory {
   gradientFrom: string;
   gradientTo: string;
 }
+
+export interface AuthUser {
+  email: string;
+  name: string;
+  isAuthenticated: boolean;
+}
+
+export interface AdminDonation {
+  id: string;
+  donorName: string;
+  donorEmail: string;
+  amount: number;
+  category: string;
+  frequency: string;
+  date: string;
+  referenceId: string;
+}
+
+export interface AdminContact {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  message: string;
+  type: string;
+  date: string;
+}
+
+export interface AdminStats {
+  totalDonations: number;
+  totalAmount: number;
+  totalContacts: number;
+}

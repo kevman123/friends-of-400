@@ -1,4 +1,4 @@
-import type { DonationRequest, DonationResponse, ContactRequest, ContactResponse, DonationCategory } from '../types';
+import type { DonationRequest, DonationResponse, ContactRequest, ContactResponse, DonationCategory, AuthUser, AdminDonation, AdminContact, AdminStats } from '../types';
 
 const API_BASE = import.meta.env.DEV ? '' : '';
 
@@ -30,4 +30,28 @@ export async function submitContact(data: ContactRequest): Promise<ContactRespon
     method: 'POST',
     body: JSON.stringify(data),
   });
+}
+
+export async function getAuthUser(): Promise<AuthUser> {
+  try {
+    return await request('/api/auth/me');
+  } catch {
+    return { isAuthenticated: false, email: '', name: '' };
+  }
+}
+
+export async function logout(): Promise<void> {
+  await request('/api/auth/logout', { method: 'POST' });
+}
+
+export async function getAdminStats(): Promise<AdminStats> {
+  return request('/api/admin/stats');
+}
+
+export async function getAdminDonations(): Promise<AdminDonation[]> {
+  return request('/api/admin/donations');
+}
+
+export async function getAdminContacts(): Promise<AdminContact[]> {
+  return request('/api/admin/contacts');
 }

@@ -1,5 +1,6 @@
 import { Link } from 'react-router';
 import Button from '../ui/Button';
+import { useAuth } from '../../contexts/AuthContext';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -7,6 +8,8 @@ interface MobileNavProps {
 }
 
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
+  const { user, login } = useAuth();
+
   if (!isOpen) return null;
 
   return (
@@ -38,6 +41,22 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           <Button href="/donate" onClick={onClose}>
             Donate
           </Button>
+          {user ? (
+            <Link
+              to="/admin"
+              onClick={onClose}
+              className="text-sm text-gray-400 hover:text-gray-600 font-medium no-underline"
+            >
+              Admin
+            </Link>
+          ) : (
+            <button
+              onClick={() => { onClose(); login(); }}
+              className="text-sm text-gray-400 hover:text-gray-600 font-medium cursor-pointer text-left"
+            >
+              Login
+            </button>
+          )}
         </nav>
       </div>
     </div>

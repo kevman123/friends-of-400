@@ -4,9 +4,11 @@ import Container from '../ui/Container';
 import Button from '../ui/Button';
 import Logo from '../ui/Logo';
 import MobileNav from './MobileNav';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { user, login } = useAuth();
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-40">
@@ -33,6 +35,18 @@ export default function Header() {
           <Button href="/donate" size="sm">
             Donate
           </Button>
+          {user ? (
+            <Link to="/admin" className="text-gray-400 hover:text-gray-600 text-sm font-medium no-underline">
+              Admin
+            </Link>
+          ) : (
+            <button
+              onClick={login}
+              className="text-gray-400 hover:text-gray-600 text-sm font-medium cursor-pointer"
+            >
+              Login
+            </button>
+          )}
         </nav>
 
         <button
