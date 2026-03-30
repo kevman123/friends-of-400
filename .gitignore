@@ -1,0 +1,30 @@
+# .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# Node
+node_modules/
+dist/
+
+# Vite
+*.local
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output in wwwroot (generated from Vite build)
+src/FriendsOf400.Api/wwwroot/*
+!src/FriendsOf400.Api/wwwroot/.gitkeep
+
+# Environment
+.env
+.env.local
+.env.production

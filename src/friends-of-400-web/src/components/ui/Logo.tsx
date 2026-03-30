@@ -1,0 +1,20 @@
+interface LogoProps {
+  className?: string;
+}
+
+export default function Logo({ className = '' }: LogoProps) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" className={className}>
+      <circle cx="32" cy="18" r="6" fill="#FF9800"/>
+      <circle cx="24" cy="22" r="5" fill="#E91E63"/>
+      <circle cx="40" cy="22" r="5" fill="#2196F3"/>
+      <circle cx="28" cy="14" r="4" fill="#FFC107"/>
+      <circle cx="36" cy="14" r="4" fill="#9C27B0"/>
+      <circle cx="32" cy="10" r="3" fill="#4CAF50"/>
+      <circle cx="20" cy="18" r="3" fill="#FF5722"/>
+      <circle cx="44" cy="18" r="3" fill="#00BCD4"/>
+      <rect x="30" y="24" width="4" height="20" rx="2" fill="#795548"/>
+      <path d="M24 44 C24 44 28 40 32 44 C36 40 40 44 40 44" stroke="#795548" strokeWidth="2" fill="none"/>
+    </svg>
+  );
+}
