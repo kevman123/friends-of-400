@@ -52,6 +52,7 @@ app.UseAuthorization();
 
 app.MapAuthEndpoints();
 app.MapAdminEndpoints();
+app.MapImageEndpoints();
 app.MapDonationEndpoints();
 app.MapContactEndpoints();
 

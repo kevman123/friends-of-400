@@ -28,6 +28,9 @@ export default function AdminLayout() {
               <NavLink to="/admin/contacts" className={navLinkClass}>
                 Contacts
               </NavLink>
+              <NavLink to="/admin/images" className={navLinkClass}>
+                Images
+              </NavLink>
             </nav>
             <div className="flex items-center gap-4 text-sm">
               <span className="text-gray-500 truncate">{user?.email}</span>

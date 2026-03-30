@@ -9,6 +9,7 @@ import AdminLayout from './components/layout/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminDonations from './pages/admin/AdminDonations';
 import AdminContacts from './pages/admin/AdminContacts';
+import AdminImages from './pages/admin/AdminImages';
 import { AuthProvider } from './contexts/AuthContext';
 
 const router = createBrowserRouter([
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
               { index: true, element: <AdminDashboard /> },
               { path: 'donations', element: <AdminDonations /> },
               { path: 'contacts', element: <AdminContacts /> },
+              { path: 'images', element: <AdminImages /> },
             ],
           },
         ],

@@ -65,3 +65,12 @@ export interface AdminStats {
   totalAmount: number;
   totalContacts: number;
 }
+
+export interface AdminImage {
+  id: string;
+  fileName: string;
+  altText: string;
+  category: string;
+  url: string;
+  uploadedAt: string;
+}

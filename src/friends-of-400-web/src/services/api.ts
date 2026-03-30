@@ -1,4 +1,4 @@
-import type { DonationRequest, DonationResponse, ContactRequest, ContactResponse, DonationCategory, AuthUser, AdminDonation, AdminContact, AdminStats } from '../types';
+import type { DonationRequest, DonationResponse, ContactRequest, ContactResponse, DonationCategory, AuthUser, AdminDonation, AdminContact, AdminStats, AdminImage } from '../types';
 
 const API_BASE = import.meta.env.DEV ? '' : '';
 
@@ -54,4 +54,29 @@ export async function getAdminDonations(): Promise<AdminDonation[]> {
 
 export async function getAdminContacts(): Promise<AdminContact[]> {
   return request('/api/admin/contacts');
+}
+
+export async function getAdminImages(): Promise<AdminImage[]> {
+  return request('/api/admin/images');
+}
+
+export async function uploadAdminImage(file: File, altText: string, category: string): Promise<AdminImage> {
+  const formData = new FormData();
+  formData.append('file', file);
+  formData.append('altText', altText);
+  formData.append('category', category);
+
+  const res = await fetch(`${API_BASE}/api/admin/images`, {
+    method: 'POST',
+    body: formData,
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || `Upload failed with status ${res.status}`);
+  }
+  return res.json();
+}
+
+export async function deleteAdminImage(id: string): Promise<void> {
+  await request(`/api/admin/images/${id}`, { method: 'DELETE' });
 }
