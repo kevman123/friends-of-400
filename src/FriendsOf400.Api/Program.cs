@@ -3,10 +3,14 @@ using FriendsOf400.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.AddServiceDefaults();
+
 builder.Services.AddScoped<IDonationService, DonationService>();
 builder.Services.AddScoped<IContactService, ContactService>();
 
 var app = builder.Build();
+
+app.MapDefaultEndpoints();
 
 app.UseStaticFiles();
 
