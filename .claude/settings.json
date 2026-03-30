@@ -5,7 +5,8 @@
       "Bash(firebase projects:addfirebase friends-of-400 --debug)",
       "Bash(grep -r \"DbContext\\\\|Entity Framework\\\\|Database\\\\|Sql\" /Users/kevinwilliams/source/friends-of-400/src/FriendsOf400.Api/ --include=*.cs --include=*.csproj)",
       "Bash(dotnet add:*)",
-      "WebFetch(domain:www.friendsof400.com)"
+      "WebFetch(domain:www.friendsof400.com)",
+      "Bash(gh secret:*)"
     ]
   }
 }
