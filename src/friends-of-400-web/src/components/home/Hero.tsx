@@ -1,14 +1,18 @@
 import Container from '../ui/Container';
 import Button from '../ui/Button';
+import Logo from '../ui/Logo';
 
 export default function Hero() {
   return (
     <section className="relative bg-gray-900 text-white overflow-hidden">
-      {/* Placeholder gradient background - replace with actual hero image */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-green/80 to-brand-blue/80" />
-      <div className="absolute inset-0 bg-black/30" />
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: 'url(/images/serve-day/Apr2022Serve4.JPG)' }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/80 via-gray-900/70 to-brand-green/40" />
 
       <Container className="relative py-24 md:py-36 text-center">
+        <Logo className="w-20 h-20 md:w-28 md:h-28 mx-auto mb-6 drop-shadow-lg" />
         <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
           Planting Strong Roots
           <br />
