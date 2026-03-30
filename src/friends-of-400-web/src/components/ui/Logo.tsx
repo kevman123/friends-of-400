@@ -4,76 +4,10 @@ interface LogoProps {
 
 export default function Logo({ className = '' }: LogoProps) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" className={className}>
-      {/* Tree trunk - green hand/arm shape */}
-      <path
-        d="M100 195 C95 195 88 190 85 180 L82 160 C80 150 82 140 88 132 L92 126 C90 120 88 114 88 108 L88 100 C88 96 92 94 96 96 L96 108 C96 108 98 96 100 96 C102 96 104 108 104 108 L104 96 C108 94 112 96 112 100 L112 108 C112 114 110 120 108 126 L112 132 C118 140 120 150 118 160 L115 180 C112 190 105 195 100 195 Z"
-        fill="#7CB342"
-      />
-      {/* Left branch */}
-      <path
-        d="M88 108 C80 100 72 96 66 98"
-        stroke="#7CB342" strokeWidth="4" fill="none" strokeLinecap="round"
-      />
-      {/* Right branch */}
-      <path
-        d="M112 108 C120 100 128 96 134 98"
-        stroke="#7CB342" strokeWidth="4" fill="none" strokeLinecap="round"
-      />
-
-      {/* Handprints - colorful child handprints forming the canopy */}
-      {/* Green handprint - center top */}
-      <g transform="translate(90, 72) scale(0.5) rotate(-10)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#4CAF50"/>
-      </g>
-      {/* Pink handprint - upper left */}
-      <g transform="translate(60, 62) scale(0.45) rotate(-40)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#E91E63"/>
-      </g>
-      {/* Blue handprint - upper right */}
-      <g transform="translate(130, 60) scale(0.45) rotate(30)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#2196F3"/>
-      </g>
-      {/* Purple handprint - left */}
-      <g transform="translate(52, 82) scale(0.4) rotate(-60)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#9C27B0"/>
-      </g>
-      {/* Orange handprint - right */}
-      <g transform="translate(140, 80) scale(0.4) rotate(50)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#FF9800"/>
-      </g>
-      {/* Yellow handprint - top */}
-      <g transform="translate(108, 48) scale(0.4) rotate(15)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#FFC107"/>
-      </g>
-      {/* Cyan handprint - far right */}
-      <g transform="translate(148, 66) scale(0.35) rotate(60)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#00BCD4"/>
-      </g>
-      {/* Red handprint - far left top */}
-      <g transform="translate(68, 48) scale(0.35) rotate(-30)">
-        <path d="M0 0 C-2 -12 -1 -24 2 -30 C4 -34 8 -34 9 -30 C10 -24 8 -16 6 -10 L12 -28 C14 -34 18 -35 20 -30 C22 -24 18 -12 16 -6 L22 -22 C24 -28 28 -28 30 -24 C32 -18 28 -8 26 -2 L30 -16 C32 -22 36 -22 38 -18 C40 -12 36 -4 34 2 C30 12 20 20 10 22 C0 24 -4 16 -2 6 Z" fill="#F44336"/>
-      </g>
-
-      {/* Hearts scattered in the canopy */}
-      {/* Pink heart - top center */}
-      <path d="M98 30 C98 26 102 22 106 22 C110 22 112 26 112 28 C112 34 105 40 105 40 C105 40 98 34 98 28 Z" fill="#E91E63" transform="rotate(-10, 105, 32)"/>
-      {/* Green heart - upper right */}
-      <path d="M132 42 C132 38 136 34 140 34 C144 34 146 38 146 40 C146 46 139 52 139 52 C139 52 132 46 132 40 Z" fill="#4CAF50" transform="rotate(15, 139, 44) scale(0.7)"/>
-      {/* Yellow heart - upper left */}
-      <path d="M54 38 C54 34 58 30 62 30 C66 30 68 34 68 36 C68 42 61 48 61 48 C61 48 54 42 54 36 Z" fill="#FFC107" transform="rotate(-15, 61, 40) scale(0.7)"/>
-      {/* Blue heart - top */}
-      <path d="M82 22 C82 18 86 14 90 14 C94 14 96 18 96 20 C96 26 89 32 89 32 C89 32 82 26 82 20 Z" fill="#2196F3" transform="rotate(5, 89, 24) scale(0.6)"/>
-      {/* Orange heart - right */}
-      <path d="M150 54 C150 50 154 46 158 46 C162 46 164 50 164 52 C164 58 157 64 157 64 C157 64 150 58 150 52 Z" fill="#FF9800" transform="scale(0.55)"/>
-      {/* Purple heart - top center-left */}
-      <path d="M76 32 C76 28 80 24 84 24 C88 24 90 28 90 30 C90 36 83 42 83 42 C83 42 76 36 76 30 Z" fill="#9C27B0" transform="rotate(10, 83, 34) scale(0.55)"/>
-
-      {/* Curved ground/roots */}
-      <path
-        d="M55 185 C70 178 85 175 100 175 C115 175 130 178 145 185"
-        stroke="#7CB342" strokeWidth="5" fill="none" strokeLinecap="round"
-      />
-    </svg>
+    <img
+      src="/images/logo-original.png"
+      alt="Friends of 400 - Planting Strong Roots for the Future"
+      className={className}
+    />
   );
 }
