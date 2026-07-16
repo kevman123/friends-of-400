@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Prepare website",
+      "type": "shell",
+      "command": "test -x \"${workspaceFolder}/src/friends-of-400-web/node_modules/.bin/vite\" || npm ci --prefix \"${workspaceFolder}/src/friends-of-400-web\"",
+      "windows": {
+        "command": "if (-not (Test-Path '${workspaceFolder}\\src\\friends-of-400-web\\node_modules\\.bin\\vite.cmd')) { npm.cmd ci --prefix '${workspaceFolder}\\src\\friends-of-400-web'; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE } }",
+        "options": {
+          "shell": {
+            "executable": "powershell.exe",
+            "args": [
+              "-NoLogo",
+              "-NoProfile",
+              "-ExecutionPolicy",
+              "Bypass",
+              "-Command"
+            ]
+          }
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "silent",
+        "panel": "shared"
+      }
+    },
+    {
+      "label": "Start website",
+      "type": "process",
+      "command": "dotnet",
+      "args": [
+        "run",
+        "--project",
+        "${workspaceFolder}/src/FriendsOf400.AppHost/FriendsOf400.AppHost.csproj",
+        "--launch-profile",
+        "https"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "dependsOn": "Prepare website",
+      "dependsOrder": "sequence",
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "clear": true
+      },
+      "runOptions": {
+        "instanceLimit": 1
+      }
+    }
+  ]
+}
