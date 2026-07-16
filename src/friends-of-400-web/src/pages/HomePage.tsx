@@ -1,6 +1,5 @@
 import { Link } from 'react-router';
 import Hero from '../components/home/Hero';
-import ImpactSection from '../components/home/ImpactSection';
 import Container from '../components/ui/Container';
 import Button from '../components/ui/Button';
 import ConfiguredAction from '../components/ui/ConfiguredAction';
@@ -25,7 +24,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <ImpactSection />
 
       <section className="bg-white py-18 sm:py-24">
         <Container>

@@ -13,6 +13,11 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
     title: 'About | Friends of 400',
     description: 'Learn about the mission, story, and values guiding Friends of 400.',
   },
+  '/impact': {
+    title: 'Academic Impact | Friends of 400',
+    description:
+      'See how Friends of 400 students are making measurable academic progress and closing grade-level gaps.',
+  },
   '/programs': {
     title: 'Programs | Friends of 400',
     description: 'Explore scouting, education and tutoring, and sports programs for young people.',

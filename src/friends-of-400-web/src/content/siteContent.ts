@@ -270,6 +270,7 @@ export const partnershipWays: Array<{
 
 export const publicNavigation = [
   { label: 'About', to: '/about' },
+  { label: 'Impact', to: '/impact' },
   { label: 'Programs', to: '/programs' },
   { label: 'Partners', to: '/partners' },
   { label: 'Get Involved', to: '/get-involved' },

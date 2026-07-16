@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import Layout from './components/layout/Layout';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
+import ImpactPage from './pages/ImpactPage';
 import GetInvolvedPage from './pages/GetInvolvedPage';
 import DonatePage from './pages/DonatePage';
 import ProgramsPage from './pages/ProgramsPage';
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: '/about', element: <AboutPage /> },
+      { path: '/impact', element: <ImpactPage /> },
       { path: '/programs', element: <ProgramsPage /> },
       { path: '/partners', element: <PartnersPage /> },
       { path: '/get-involved', element: <GetInvolvedPage /> },
