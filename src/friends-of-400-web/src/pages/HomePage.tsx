@@ -21,6 +21,11 @@ const accentStyles = {
 };
 
 export default function HomePage() {
+  const updatesUrl = externalLinks.newsletterUrl || externalLinks.social.facebook;
+  const updatesLabel = externalLinks.newsletterUrl
+    ? 'Sign up for updates'
+    : 'Follow on Facebook';
+
   return (
     <>
       <Hero />
@@ -135,31 +140,29 @@ export default function HomePage() {
                 Volunteer needs may include tutoring, coaching, event support, mentoring, and
                 practical help behind the scenes.
               </p>
-              <ConfiguredAction
-                href={externalLinks.volunteerUrl}
-                fallbackHref="/contact?topic=volunteer"
+              <Button
+                href="/get-involved#volunteer-opportunities"
                 variant="white"
                 className="mt-7"
               >
-                Volunteer with us
-              </ConfiguredAction>
+                See volunteer opportunities
+              </Button>
             </div>
 
             <div className="rounded-[2rem] bg-brand-sunshine p-7 text-brand-ink sm:p-9">
               <p className="text-sm font-black uppercase tracking-[.14em] text-brand-plum">
                 Stay connected
               </p>
-              <h2 className="mt-3 text-3xl font-semibold text-brand-plum">Get Friends of 400 updates</h2>
+              <h2 className="mt-3 text-3xl font-semibold text-brand-plum">Follow Friends of 400</h2>
               <p className="mt-4 max-w-xl leading-relaxed text-brand-ink/80">
                 Hear about program needs, volunteer opportunities, community events, and ways to
                 support the work.
               </p>
               <ConfiguredAction
-                href={externalLinks.newsletterUrl}
-                fallbackHref="/contact#updates"
+                href={updatesUrl}
                 className="mt-7"
               >
-                Sign up for updates
+                {updatesLabel}
               </ConfiguredAction>
             </div>
           </div>

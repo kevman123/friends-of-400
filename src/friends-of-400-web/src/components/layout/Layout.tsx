@@ -28,11 +28,11 @@ const pageMetadata: Record<string, { title: string; description: string }> = {
   },
   '/get-involved': {
     title: 'Get Involved | Friends of 400',
-    description: 'Donate, volunteer, partner, or subscribe for Friends of 400 updates.',
+    description: 'Explore current Friends of 400 volunteer forms, giving options, partnerships, and community updates.',
   },
   '/donate': {
     title: 'Donate | Friends of 400',
-    description: 'Choose a giving category and continue to the configured secure donation provider.',
+    description: 'Choose a current Friends of 400 giving fund or open the organization’s Amazon wish list.',
   },
   '/contact': {
     title: 'Contact | Friends of 400',

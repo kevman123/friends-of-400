@@ -30,6 +30,10 @@ export default function ContactPage() {
       organization.contactPhone ||
       externalLinks.contactFormUrl,
   );
+  const updatesUrl = externalLinks.newsletterUrl || externalLinks.social.facebook;
+  const updatesLabel = externalLinks.newsletterUrl
+    ? 'Sign up for updates'
+    : 'Follow on Facebook';
 
   return (
     <>
@@ -142,25 +146,19 @@ export default function ContactPage() {
         <Container className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
           <div className="max-w-3xl">
             <p className="text-sm font-black uppercase tracking-[.14em] text-brand-sunshine">
-              Email updates
+              Community updates
             </p>
             <h2 className="mt-3 text-4xl font-semibold text-white">Stay connected to the work</h2>
             <p className="mt-4 leading-relaxed text-white/78">
-              Get program news, current needs, volunteer opportunities, and community updates.
+              Follow program news, current needs, volunteer opportunities, and community events.
             </p>
-            {!externalLinks.newsletterUrl && (
-              <p className="mt-3 text-sm font-bold text-brand-sunshine">
-                The newsletter signup link has not yet been configured.
-              </p>
-            )}
           </div>
           <ConfiguredAction
-            href={externalLinks.newsletterUrl}
-            unavailableLabel="Signup link coming soon"
+            href={updatesUrl}
             variant="white"
             size="lg"
           >
-            Sign up for updates
+            {updatesLabel}
           </ConfiguredAction>
         </Container>
       </section>

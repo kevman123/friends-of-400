@@ -22,6 +22,10 @@ const accentStyles = {
 
 export default function PartnersPage() {
   const featuredPartners = partners.filter((partner) => partner.featured);
+  const updatesUrl = externalLinks.newsletterUrl || externalLinks.social.facebook;
+  const updatesLabel = externalLinks.newsletterUrl
+    ? 'Sign up for updates'
+    : 'Follow on Facebook';
 
   return (
     <>
@@ -189,15 +193,14 @@ export default function PartnersPage() {
             <div className="mt-8 border-t border-white/15 pt-7">
               <h3 className="text-2xl font-semibold text-white">Stay informed</h3>
               <p className="mt-3 text-sm leading-relaxed text-white/75">
-                Subscribe for updates about needs, service opportunities, and community progress.
+                Follow updates about needs, service opportunities, and community progress.
               </p>
               <ConfiguredAction
-                href={externalLinks.newsletterUrl}
-                fallbackHref="/contact#updates"
+                href={updatesUrl}
                 variant="outline"
                 className="mt-5 border-white text-white hover:bg-white hover:text-brand-plum"
               >
-                Sign up for updates
+                {updatesLabel}
               </ConfiguredAction>
             </div>
           </aside>

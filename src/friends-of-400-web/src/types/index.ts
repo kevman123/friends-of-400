@@ -30,6 +30,19 @@ export interface DonationCategory {
   name: string;
   description: string;
   accent: AccentName;
+  provider: 'Funraise' | 'Amazon';
+  actionLabel: string;
+}
+
+export interface VolunteerOpportunity {
+  id: string;
+  title: string;
+  description: string;
+  label: string;
+  url: string;
+  accent: AccentName;
+  actionLabel?: string;
+  note?: string;
 }
 
 export type AccentName = 'plum' | 'forest' | 'sky' | 'sunshine' | 'coral' | 'leaf';

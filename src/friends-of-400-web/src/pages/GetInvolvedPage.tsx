@@ -3,9 +3,27 @@ import ConfiguredAction from '../components/ui/ConfiguredAction';
 import Container from '../components/ui/Container';
 import PageHero from '../components/ui/PageHero';
 import SectionHeading from '../components/ui/SectionHeading';
-import { externalLinks, images } from '../content/siteContent';
+import {
+  externalLinks,
+  images,
+  volunteerOpportunities,
+} from '../content/siteContent';
+
+const opportunityAccentStyles = {
+  plum: 'bg-brand-plum/10 text-brand-plum',
+  forest: 'bg-brand-forest/12 text-brand-forest',
+  sky: 'bg-brand-sky/18 text-brand-ink',
+  sunshine: 'bg-brand-sunshine/25 text-brand-plum',
+  coral: 'bg-brand-coral/18 text-brand-plum',
+  leaf: 'bg-brand-leaf/20 text-brand-forest',
+};
 
 export default function GetInvolvedPage() {
+  const updatesUrl = externalLinks.newsletterUrl || externalLinks.social.facebook;
+  const updatesLabel = externalLinks.newsletterUrl
+    ? 'Sign up for updates'
+    : 'Follow on Facebook';
+
   const involvementPaths = [
     {
       number: '01',
@@ -24,13 +42,9 @@ export default function GetInvolvedPage() {
         'Share time as a tutor, coach, mentor, event helper, or behind-the-scenes volunteer.',
       color: 'bg-brand-sky/18',
       action: (
-        <ConfiguredAction
-          href={externalLinks.volunteerUrl}
-          fallbackHref="/contact?topic=volunteer"
-          variant="secondary"
-        >
-          Volunteer with us
-        </ConfiguredAction>
+        <Button href="#volunteer-opportunities" variant="secondary">
+          See volunteer opportunities
+        </Button>
       ),
     },
     {
@@ -49,17 +63,16 @@ export default function GetInvolvedPage() {
     {
       number: '04',
       eyebrow: 'Connect',
-      title: 'Get updates',
+      title: 'Follow the work',
       description:
         'Hear about current needs, program opportunities, and community events.',
       color: 'bg-brand-leaf/16',
       action: (
         <ConfiguredAction
-          href={externalLinks.newsletterUrl}
-          fallbackHref="/contact#updates"
+          href={updatesUrl}
           variant="outline"
         >
-          Sign up for updates
+          {updatesLabel}
         </ConfiguredAction>
       ),
     },
@@ -108,7 +121,54 @@ export default function GetInvolvedPage() {
         </Container>
       </section>
 
-      <section className="bg-brand-cream py-18 sm:py-24">
+      <section
+        id="volunteer-opportunities"
+        className="scroll-mt-32 bg-brand-cream py-18 sm:py-24"
+      >
+        <Container>
+          <SectionHeading
+            eyebrow="Volunteer opportunities"
+            title="Choose a current way to serve"
+            description="Use the official Friends of 400 sign-up form for the opportunity that best matches how you want to help."
+            align="center"
+          />
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {volunteerOpportunities.map((opportunity) => (
+              <article
+                key={opportunity.id}
+                className="soft-card flex h-full flex-col p-6 sm:p-7"
+              >
+                <span
+                  className={`inline-flex w-fit rounded-full px-3 py-1.5 text-xs font-black uppercase tracking-[.12em] ${opportunityAccentStyles[opportunity.accent]}`}
+                >
+                  {opportunity.label}
+                </span>
+                <h3 className="mt-5 text-2xl font-semibold leading-tight text-brand-plum">
+                  {opportunity.title}
+                </h3>
+                <p className="mt-3 flex-1 leading-relaxed text-brand-ink/74">
+                  {opportunity.description}
+                </p>
+                {opportunity.note && (
+                  <p className="mt-5 rounded-2xl bg-brand-sunshine/20 p-4 text-sm font-bold leading-relaxed text-brand-plum">
+                    {opportunity.note}
+                  </p>
+                )}
+                <Button href={opportunity.url} variant="outline" className="mt-6">
+                  {opportunity.actionLabel ?? 'Open sign-up form'}
+                </Button>
+              </article>
+            ))}
+          </div>
+
+          <p className="mx-auto mt-8 max-w-3xl text-center text-sm leading-relaxed text-brand-ink/65">
+            Sign-up forms open in a new tab and are hosted by Jotform on behalf of Friends of 400.
+          </p>
+        </Container>
+      </section>
+
+      <section className="bg-white py-18 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
           <div>
             <SectionHeading
@@ -141,9 +201,13 @@ export default function GetInvolvedPage() {
               Share your interests, availability, and any experience you would like to contribute.
               Friends of 400 can connect you with the most appropriate current opportunity.
             </p>
-            <Button href="/contact" variant="white" className="mt-8">
-              Contact Friends of 400
-            </Button>
+            <ConfiguredAction
+              href={externalLinks.volunteerUrl}
+              variant="white"
+              className="mt-8"
+            >
+              Open the volunteer interest form
+            </ConfiguredAction>
           </aside>
         </Container>
       </section>

@@ -1,5 +1,4 @@
-import { useParams } from 'react-router';
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 import Button from '../components/ui/Button';
 import ConfiguredAction from '../components/ui/ConfiguredAction';
 import Container from '../components/ui/Container';
@@ -26,13 +25,14 @@ export default function DonatePage() {
     ? donationCategories.find((item) => item.id === category) ?? donationCategories[0]
     : undefined;
   const donationUrl = getDonationUrl(selectedCategory?.id);
+  const isWishList = selectedCategory?.provider === 'Amazon';
 
   return (
     <>
       <PageHero
         eyebrow="Donate"
-        title="Give toward the kind of support that helps children grow"
-        description="Choose a program priority or give wherever support is needed most. Friends of 400 never collects payment information directly on this website."
+        title="Choose how you want to support the work"
+        description="Give to a priority, become a monthly donor, or purchase requested supplies. Friends of 400 never collects payment information directly on this website."
         image={images.educationSupport}
         accent="sunshine"
       />
@@ -40,9 +40,9 @@ export default function DonatePage() {
       <section className="bg-white py-18 sm:py-24">
         <Container>
           <SectionHeading
-            eyebrow="Choose a giving area"
-            title="Direct your support"
-            description="Select a category to review it before continuing to the configured secure giving provider."
+            eyebrow="Giving opportunities"
+            title="Direct your support where it matters to you"
+            description="These are the current giving destinations published by Friends of 400. Select one to review it before continuing to the external provider."
             align="center"
           />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -61,10 +61,13 @@ export default function DonatePage() {
                   aria-current={isSelected ? 'page' : undefined}
                 >
                   <span className={`block h-2.5 w-16 rounded-full ${accentStyles[item.accent]}`} aria-hidden="true" />
-                  <h3 className="mt-5 text-2xl font-semibold text-brand-plum">{item.name}</h3>
+                  <span className="mt-5 inline-flex rounded-full bg-brand-plum/8 px-3 py-1 text-xs font-black uppercase tracking-[.12em] text-brand-forest">
+                    {item.provider === 'Amazon' ? 'Wish list' : 'Secure giving'}
+                  </span>
+                  <h3 className="mt-4 text-2xl font-semibold text-brand-plum">{item.name}</h3>
                   <p className="mt-3 leading-relaxed text-brand-ink/72">{item.description}</p>
                   <span className="mt-5 inline-flex min-h-11 items-center font-extrabold text-brand-forest">
-                    Select this area
+                    View this opportunity
                   </span>
                 </Link>
               );
@@ -87,10 +90,12 @@ export default function DonatePage() {
               {donationUrl ? (
                 <>
                   <p className="mt-6 text-sm font-bold text-brand-forest">
-                    You will leave Friends of 400 and continue with the secure giving provider.
+                    {isWishList
+                      ? 'You will leave Friends of 400 and continue to the organization’s Amazon wish list.'
+                      : 'You will leave Friends of 400 and continue to the secure Funraise giving page.'}
                   </p>
                   <ConfiguredAction href={donationUrl} size="lg" className="mt-7">
-                    Continue to secure giving
+                    {selectedCategory.actionLabel}
                   </ConfiguredAction>
                 </>
               ) : (
@@ -102,11 +107,11 @@ export default function DonatePage() {
                   </p>
                   <ConfiguredAction
                     href=""
-                    unavailableLabel="Giving link coming soon"
+                    unavailableLabel="External link coming soon"
                     size="lg"
                     className="mt-5"
                   >
-                    Continue to secure giving
+                    {selectedCategory.actionLabel}
                   </ConfiguredAction>
                 </div>
               )}
@@ -124,9 +129,9 @@ export default function DonatePage() {
       {!selectedCategory && (
         <section className="bg-brand-forest py-14 text-white">
           <Container className="text-center">
-            <h2 className="text-3xl font-semibold text-white">Choose a giving area above to continue</h2>
+            <h2 className="text-3xl font-semibold text-white">Choose an opportunity above to continue</h2>
             <p className="mx-auto mt-3 max-w-2xl text-white/85">
-              You will review the selected purpose before any link to an external payment provider appears.
+              You will review the selected purpose before any external giving or wish-list link appears.
             </p>
           </Container>
         </section>

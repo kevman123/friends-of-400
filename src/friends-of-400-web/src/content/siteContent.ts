@@ -8,9 +8,40 @@ import type {
   OrganizationInfo,
   Partner,
   Program,
+  VolunteerOpportunity,
 } from '../types';
 
 const configured = (value: string | undefined) => value?.trim() ?? '';
+const withDefault = (
+  fallback: string,
+  ...values: Array<string | undefined>
+) => values.map(configured).find(Boolean) ?? fallback;
+
+// Public destinations synchronized from https://linktr.ee/searcyvolunteers on 2026-07-16.
+// Environment variables remain available as deployment-time overrides.
+const publicActionDefaults = {
+  generalFund:
+    'https://funraise.org/give/Friends-of-400-Foundation/08642a24-9f95-4849-94ae-1d4024408387/',
+  monthlySupport:
+    'https://funraise.org/give/Friends-of-400-Foundation/4b0035f6-0bd3-48a1-bed6-2b43db27285b',
+  emergencySupport:
+    'https://funraise.org/give/Friends-of-400-Foundation/32fcd214-2aef-4144-b5b2-67c60bfaa0f5',
+  sportsSponsorships:
+    'https://funraise.org/give/Friends-of-400-Foundation/69840cfb-bb44-409e-b356-11ae91c98f20',
+  educationProgram:
+    'https://funraise.org/give/Friends-of-400-Foundation/02c4c05d-b2f7-4d0f-9b29-0c6c6ccae282',
+  transportationFund:
+    'https://funraise.org/give/Friends-of-400-Foundation/65b97a66-3288-45a5-8024-e0405315d301',
+  amazonWishList: 'https://a.co/cFnWKnm',
+  schoolSupplyDrive:
+    'https://funraise.org/give/Friends-of-400-Foundation/9ae7a7b8-703f-42bb-81bd-e9cb9906a52f',
+  volunteerInterest: 'https://form.jotform.com/251216466318052',
+  itemDeliveryVolunteer: 'https://form.jotform.com/252615869574067',
+  volunteerTutor: 'https://form.jotform.com/250537566972165',
+  summerProgramVolunteer: 'https://form.jotform.com/260895547543166',
+  greatFirstDayVolunteer: 'https://form.jotform.com/261807732458161',
+  facebook: 'https://www.facebook.com/profile.php?id=61572466671292',
+} as const;
 
 const optimizedImage = (
   stem: string,
@@ -77,34 +108,133 @@ export const organization: OrganizationInfo = {
 
 export const externalLinks: ExternalLinks = {
   donation: {
-    defaultUrl: configured(import.meta.env.VITE_DONATION_URL),
+    defaultUrl: withDefault(
+      publicActionDefaults.generalFund,
+      import.meta.env.VITE_DONATION_URL,
+    ),
     categoryUrls: {
-      'general-fund': configured(import.meta.env.VITE_DONATE_GENERAL_FUND_URL),
-      'monthly-support': configured(import.meta.env.VITE_DONATE_MONTHLY_SUPPORT_URL),
-      'educational-incentives': configured(
-        import.meta.env.VITE_DONATE_EDUCATIONAL_INCENTIVES_URL,
+      'general-fund': withDefault(
+        publicActionDefaults.generalFund,
+        import.meta.env.VITE_DONATE_GENERAL_FUND_URL,
       ),
-      'hygiene-kits': configured(import.meta.env.VITE_DONATE_HYGIENE_KITS_URL),
-      'soccer-sponsorships': configured(
+      'monthly-support': withDefault(
+        publicActionDefaults.monthlySupport,
+        import.meta.env.VITE_DONATE_MONTHLY_SUPPORT_URL,
+      ),
+      'emergency-support': withDefault(
+        publicActionDefaults.emergencySupport,
+        import.meta.env.VITE_DONATE_EMERGENCY_SUPPORT_URL,
+      ),
+      'soccer-sponsorships': withDefault(
+        publicActionDefaults.sportsSponsorships,
+        import.meta.env.VITE_DONATE_SPORTS_SPONSORSHIPS_URL,
         import.meta.env.VITE_DONATE_SOCCER_SPONSORSHIPS_URL,
       ),
-      'transportation-fund': configured(
+      'educational-incentives': withDefault(
+        publicActionDefaults.educationProgram,
+        import.meta.env.VITE_DONATE_EDUCATION_PROGRAM_URL,
+        import.meta.env.VITE_DONATE_EDUCATIONAL_INCENTIVES_URL,
+      ),
+      'transportation-fund': withDefault(
+        publicActionDefaults.transportationFund,
         import.meta.env.VITE_DONATE_TRANSPORTATION_FUND_URL,
+      ),
+      'amazon-wish-list': withDefault(
+        publicActionDefaults.amazonWishList,
+        import.meta.env.VITE_AMAZON_WISH_LIST_URL,
+      ),
+      'school-supply-drive': withDefault(
+        publicActionDefaults.schoolSupplyDrive,
+        import.meta.env.VITE_DONATE_SCHOOL_SUPPLY_DRIVE_URL,
       ),
     },
   },
-  volunteerUrl: configured(import.meta.env.VITE_VOLUNTEER_URL),
+  volunteerUrl: withDefault(
+    publicActionDefaults.volunteerInterest,
+    import.meta.env.VITE_VOLUNTEER_GENERAL_URL,
+    import.meta.env.VITE_VOLUNTEER_URL,
+  ),
   newsletterUrl: configured(import.meta.env.VITE_NEWSLETTER_URL),
   partnerInquiryUrl: configured(import.meta.env.VITE_PARTNER_INQUIRY_URL),
   contactFormUrl: configured(import.meta.env.VITE_CONTACT_FORM_URL),
   privacyUrl: configured(import.meta.env.VITE_PRIVACY_URL),
   social: {
-    facebook: configured(import.meta.env.VITE_FACEBOOK_URL),
+    facebook: withDefault(
+      publicActionDefaults.facebook,
+      import.meta.env.VITE_FACEBOOK_URL,
+    ),
     instagram: configured(import.meta.env.VITE_INSTAGRAM_URL),
     youtube: configured(import.meta.env.VITE_YOUTUBE_URL),
     linkedin: configured(import.meta.env.VITE_LINKEDIN_URL),
   },
 };
+
+const volunteerTutorOverride = configured(
+  import.meta.env.VITE_VOLUNTEER_TUTOR_URL,
+);
+
+export const volunteerOpportunities: VolunteerOpportunity[] = [
+  {
+    id: 'great-first-day-2026',
+    title: 'Project Great First Day Volunteer Sign-Up 2026',
+    description:
+      'Help with Project Great First Day and support students as they prepare for the new school year.',
+    label: 'Seasonal event',
+    url: withDefault(
+      publicActionDefaults.greatFirstDayVolunteer,
+      import.meta.env.VITE_VOLUNTEER_GREAT_FIRST_DAY_URL,
+    ),
+    accent: 'sunshine',
+  },
+  {
+    id: 'volunteer-interest',
+    title: 'Volunteer Interest Form',
+    description:
+      'Share your interests, availability, and the kinds of service you would like to offer.',
+    label: 'Start here',
+    url: externalLinks.volunteerUrl,
+    accent: 'forest',
+  },
+  {
+    id: 'summer-program',
+    title: 'Summer Program Volunteer Interest Form',
+    description:
+      'Express interest in helping with Friends of 400 summer programming.',
+    label: 'Summer program',
+    url: withDefault(
+      publicActionDefaults.summerProgramVolunteer,
+      import.meta.env.VITE_VOLUNTEER_SUMMER_PROGRAM_URL,
+    ),
+    accent: 'coral',
+  },
+  {
+    id: 'item-delivery',
+    title: 'Item Delivery Volunteer Sign-Up',
+    description:
+      'Sign up to help Friends of 400 with item deliveries and practical logistics.',
+    label: 'Logistics',
+    url: withDefault(
+      publicActionDefaults.itemDeliveryVolunteer,
+      import.meta.env.VITE_VOLUNTEER_ITEM_DELIVERY_URL,
+    ),
+    accent: 'sky',
+  },
+  {
+    id: 'volunteer-tutor',
+    title: 'Volunteer Tutor Sign-Up',
+    description:
+      'Sign up to support students through tutoring and academic encouragement.',
+    label: 'Education',
+    url: volunteerTutorOverride || externalLinks.volunteerUrl,
+    accent: 'leaf',
+    actionLabel: volunteerTutorOverride
+      ? 'Open sign-up form'
+      : 'Use the volunteer interest form',
+    note: volunteerTutorOverride
+      ? undefined
+      : 'The tutor-specific form currently listed on Linktree is unavailable. Use the general form and mention your interest in tutoring.',
+  },
+];
 
 export const programs: Program[] = [
   {
@@ -169,45 +299,75 @@ export const programs: Program[] = [
 export const donationCategories: DonationCategory[] = [
   {
     id: 'general-fund',
-    name: 'General Fund',
+    name: 'Friends of 400 General Fund',
     description:
       'Help meet urgent needs and sustain programs for local children and families.',
     accent: 'plum',
+    provider: 'Funraise',
+    actionLabel: 'Give to the general fund',
   },
   {
     id: 'monthly-support',
-    name: 'Monthly Support',
+    name: 'Become a Monthly Donor',
     description:
       'Provide steady, reliable support that helps Friends of 400 plan ahead.',
     accent: 'forest',
+    provider: 'Funraise',
+    actionLabel: 'Become a monthly donor',
   },
   {
-    id: 'educational-incentives',
-    name: 'Educational Incentives',
+    id: 'emergency-support',
+    name: 'Emergency Support Fund',
     description:
-      'Celebrate student progress with practical rewards and positive encouragement.',
+      'Help Friends of 400 respond to urgent needs affecting local children and families.',
+    accent: 'coral',
+    provider: 'Funraise',
+    actionLabel: 'Give to emergency support',
+  },
+  {
+    id: 'school-supply-drive',
+    name: 'School Supply Drive Fund — Project Great First Day',
+    description:
+      'Help provide backpacks and school supplies so students can begin the year ready to learn.',
     accent: 'sunshine',
-  },
-  {
-    id: 'hygiene-kits',
-    name: 'Hygiene Kits',
-    description:
-      'Provide children with everyday essentials such as shampoo, deodorant, and toothpaste.',
-    accent: 'sky',
+    provider: 'Funraise',
+    actionLabel: 'Support the school supply drive',
   },
   {
     id: 'soccer-sponsorships',
-    name: 'Soccer Sponsorships',
+    name: 'Sports Sponsorships',
     description:
       'Help cover uniforms, equipment, and participation costs so children can play.',
-    accent: 'coral',
+    accent: 'sky',
+    provider: 'Funraise',
+    actionLabel: 'Sponsor youth sports',
+  },
+  {
+    id: 'educational-incentives',
+    name: 'Education Program',
+    description:
+      'Support year-round tutoring, individualized academic help, and student progress.',
+    accent: 'leaf',
+    provider: 'Funraise',
+    actionLabel: 'Support the education program',
   },
   {
     id: 'transportation-fund',
     name: 'Transportation Fund',
     description:
       'Help young people get safely to programs, activities, and community events.',
-    accent: 'leaf',
+    accent: 'coral',
+    provider: 'Funraise',
+    actionLabel: 'Give to transportation',
+  },
+  {
+    id: 'amazon-wish-list',
+    name: 'Amazon Wish List',
+    description:
+      'Purchase requested supplies and have them sent through the Friends of 400 Amazon wish list.',
+    accent: 'sunshine',
+    provider: 'Amazon',
+    actionLabel: 'Open the Amazon wish list',
   },
 ];
 

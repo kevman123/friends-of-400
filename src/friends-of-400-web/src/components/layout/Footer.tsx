@@ -48,17 +48,17 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-white">Take action</h3>
             <nav className="mt-4 flex flex-col gap-3" aria-label="Footer action links">
-              <Link to="/get-involved" className="inline-flex min-h-11 items-center text-sm text-white/75 no-underline hover:text-white">
+              <Link to="/get-involved#volunteer-opportunities" className="inline-flex min-h-11 items-center text-sm text-white/75 no-underline hover:text-white">
                 Volunteer
               </Link>
               <Link to="/partners" className="inline-flex min-h-11 items-center text-sm text-white/75 no-underline hover:text-white">
                 Become a partner
               </Link>
               <Link to="/donate" className="inline-flex min-h-11 items-center text-sm text-white/75 no-underline hover:text-white">
-                Donate
+                Giving opportunities
               </Link>
               <Link to="/contact#updates" className="inline-flex min-h-11 items-center text-sm text-white/75 no-underline hover:text-white">
-                Sign up for updates
+                Follow community updates
               </Link>
             </nav>
           </div>
