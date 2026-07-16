@@ -52,7 +52,7 @@ export default function DonatePage() {
               return (
                 <Link
                   key={item.id}
-                  to={`/donate/${item.id}`}
+                  to={`/donate/${item.id}#give-online`}
                   className={`group rounded-[1.75rem] border-2 p-6 no-underline transition ${
                     isSelected
                       ? 'border-brand-plum bg-brand-cream shadow-lg'
