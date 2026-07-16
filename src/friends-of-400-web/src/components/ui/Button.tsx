@@ -12,16 +12,20 @@ interface ButtonProps {
 }
 
 const variantStyles: Record<string, string> = {
-  primary: 'bg-brand-green hover:bg-brand-green-dark text-white',
-  secondary: 'bg-brand-blue hover:bg-blue-700 text-white',
-  outline: 'border-2 border-brand-green text-brand-green hover:bg-brand-green hover:text-white',
-  white: 'bg-white text-brand-green hover:bg-gray-100',
+  primary:
+    'border-2 border-brand-plum bg-brand-plum text-white shadow-[0_8px_0_rgba(82,37,95,.14)] hover:-translate-y-0.5 hover:bg-brand-plum-dark',
+  secondary:
+    'border-2 border-brand-forest bg-brand-forest text-white shadow-[0_8px_0_rgba(47,111,62,.14)] hover:-translate-y-0.5 hover:bg-brand-forest-dark',
+  outline:
+    'border-2 border-brand-plum bg-transparent text-brand-plum hover:-translate-y-0.5 hover:bg-brand-plum hover:text-white',
+  white:
+    'border-2 border-white bg-white text-brand-plum hover:-translate-y-0.5 hover:bg-brand-cream',
 };
 
 const sizeStyles: Record<string, string> = {
-  sm: 'px-4 py-2 text-sm',
-  md: 'px-6 py-3 text-base',
-  lg: 'px-8 py-4 text-lg',
+  sm: 'min-h-11 px-4 py-2 text-sm',
+  md: 'min-h-12 px-6 py-3 text-base',
+  lg: 'min-h-14 px-8 py-4 text-lg',
 };
 
 export default function Button({
@@ -34,11 +38,28 @@ export default function Button({
   disabled = false,
   className = '',
 }: ButtonProps) {
-  const classes = `inline-flex items-center justify-center font-semibold rounded-full transition-colors duration-200 ${variantStyles[variant]} ${sizeStyles[size]} ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${className}`;
+  const classes = `inline-flex items-center justify-center rounded-full font-bold no-underline transition duration-200 ${variantStyles[variant]} ${sizeStyles[size]} ${disabled ? 'cursor-not-allowed opacity-55 shadow-none' : 'cursor-pointer'} ${className}`;
 
   if (href) {
+    const isExternal = /^(https?:|mailto:|tel:)/.test(href);
+
+    if (isExternal) {
+      return (
+        <a
+          href={href}
+          className={classes}
+          onClick={onClick}
+          target={href.startsWith('http') ? '_blank' : undefined}
+          rel={href.startsWith('http') ? 'noreferrer' : undefined}
+        >
+          {children}
+          {href.startsWith('http') && <span className="sr-only"> (opens in a new tab)</span>}
+        </a>
+      );
+    }
+
     return (
-      <Link to={href} className={classes}>
+      <Link to={href} className={classes} onClick={onClick}>
         {children}
       </Link>
     );

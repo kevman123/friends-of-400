@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import Container from '../../components/ui/Container';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import { getAdminStats } from '../../services/api';
 import type { AdminStats } from '../../types';
 

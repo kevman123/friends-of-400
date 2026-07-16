@@ -4,6 +4,10 @@ import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import GetInvolvedPage from './pages/GetInvolvedPage';
 import DonatePage from './pages/DonatePage';
+import ProgramsPage from './pages/ProgramsPage';
+import PartnersPage from './pages/PartnersPage';
+import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdminLayout from './components/layout/AdminLayout';
 import AdminDashboard from './pages/admin/AdminDashboard';
@@ -18,7 +22,10 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <HomePage /> },
       { path: '/about', element: <AboutPage /> },
+      { path: '/programs', element: <ProgramsPage /> },
+      { path: '/partners', element: <PartnersPage /> },
       { path: '/get-involved', element: <GetInvolvedPage /> },
+      { path: '/contact', element: <ContactPage /> },
       { path: '/donate', element: <DonatePage /> },
       { path: '/donate/:category', element: <DonatePage /> },
       {
@@ -36,6 +43,7 @@ const router = createBrowserRouter([
           },
         ],
       },
+      { path: '*', element: <NotFoundPage /> },
     ],
   },
 ]);

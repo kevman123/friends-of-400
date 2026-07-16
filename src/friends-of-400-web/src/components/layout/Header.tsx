@@ -1,66 +1,68 @@
-import { useState } from 'react';
-import { Link } from 'react-router';
+import { useRef, useState } from 'react';
+import { Link, NavLink } from 'react-router';
 import Container from '../ui/Container';
 import Button from '../ui/Button';
 import Logo from '../ui/Logo';
 import MobileNav from './MobileNav';
-import { useAuth } from '../../contexts/AuthContext';
+import { publicNavigation } from '../../content/siteContent';
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { user, login } = useAuth();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+
+  function closeMobileMenu() {
+    setMobileOpen(false);
+    requestAnimationFrame(() => menuButtonRef.current?.focus());
+  }
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-40">
-      <Container className="flex items-center justify-between h-20">
-        <Link to="/" className="flex items-center gap-3 no-underline">
-          <Logo className="w-12 h-12" />
-          <div>
-            <h1 className="text-xl font-bold text-gray-900 leading-tight m-0">
-              Friends of 400
-            </h1>
-            <p className="text-xs text-brand-green italic m-0">
-              Planting Strong Roots for the Future
-            </p>
-          </div>
+    <header className="sticky top-0 z-40 border-b border-brand-plum/10 bg-brand-cream/95 shadow-[0_4px_24px_rgba(36,49,58,.06)] backdrop-blur">
+      <Container className="flex min-h-24 items-center justify-between gap-6">
+        <Link
+          to="/"
+          className="inline-flex shrink-0 items-center no-underline"
+          aria-label="Friends of 400 home"
+        >
+          <Logo className="h-auto w-[104px] sm:w-[116px]" />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
-          <Link to="/about" className="text-gray-600 hover:text-gray-900 font-medium no-underline">
-            About Us
-          </Link>
-          <Link to="/get-involved" className="text-gray-600 hover:text-gray-900 font-medium no-underline">
-            Get Involved
-          </Link>
+        <nav className="hidden items-center gap-3 lg:flex xl:gap-5" aria-label="Primary navigation">
+          {publicNavigation.map((item) => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) =>
+                `rounded-full px-2 py-3 text-sm font-bold no-underline transition-colors xl:px-3 ${
+                  isActive
+                    ? 'text-brand-plum underline decoration-brand-coral decoration-4 underline-offset-8'
+                    : 'text-brand-ink/75 hover:text-brand-plum'
+                }`
+              }
+            >
+              {item.label}
+            </NavLink>
+          ))}
           <Button href="/donate" size="sm">
             Donate
           </Button>
-          {user ? (
-            <Link to="/admin" className="text-gray-400 hover:text-gray-600 text-sm font-medium no-underline">
-              Admin
-            </Link>
-          ) : (
-            <button
-              onClick={login}
-              className="text-gray-400 hover:text-gray-600 text-sm font-medium cursor-pointer"
-            >
-              Login
-            </button>
-          )}
         </nav>
 
         <button
-          className="md:hidden p-2 text-gray-600 cursor-pointer"
+          ref={menuButtonRef}
+          type="button"
+          className="inline-flex min-h-12 min-w-12 flex-col items-center justify-center gap-1.5 rounded-full border-2 border-brand-plum/20 bg-white text-brand-plum lg:hidden"
           onClick={() => setMobileOpen(true)}
-          aria-label="Open menu"
+          aria-label="Open navigation menu"
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+          <span className="h-0.5 w-5 rounded-full bg-current" />
+          <span className="h-0.5 w-5 rounded-full bg-current" />
+          <span className="h-0.5 w-5 rounded-full bg-current" />
         </button>
       </Container>
 
-      <MobileNav isOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
+      <MobileNav isOpen={mobileOpen} onClose={closeMobileMenu} />
     </header>
   );
 }

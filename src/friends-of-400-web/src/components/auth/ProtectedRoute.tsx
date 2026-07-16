@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import Container from '../ui/Container';
 
 export default function ProtectedRoute() {

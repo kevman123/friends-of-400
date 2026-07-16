@@ -29,8 +29,83 @@ export interface DonationCategory {
   id: string;
   name: string;
   description: string;
-  gradientFrom: string;
-  gradientTo: string;
+  accent: AccentName;
+}
+
+export type AccentName = 'plum' | 'forest' | 'sky' | 'sunshine' | 'coral' | 'leaf';
+
+export interface ImageAsset {
+  src: string;
+  srcSet?: string;
+  width: number;
+  height: number;
+  alt: string;
+  position?: string;
+}
+
+export interface Program {
+  id: string;
+  name: string;
+  shortName: string;
+  summary: string;
+  audience: string;
+  activities: string[];
+  schedule?: string;
+  location?: string;
+  participation: string;
+  support: string;
+  accent: AccentName;
+  image: ImageAsset;
+}
+
+export interface Partner {
+  name: string;
+  summary: string;
+  contribution?: string;
+  website?: string;
+  logo?: ImageAsset;
+  featured?: boolean;
+}
+
+export interface LeadershipMember {
+  name: string;
+  role: string;
+  bio?: string;
+  photo?: ImageAsset;
+}
+
+export interface ImpactStat {
+  value: string;
+  label: string;
+  context?: string;
+}
+
+export interface ExternalLinks {
+  donation: {
+    defaultUrl: string;
+    categoryUrls: Record<string, string>;
+  };
+  volunteerUrl: string;
+  newsletterUrl: string;
+  partnerInquiryUrl: string;
+  contactFormUrl: string;
+  privacyUrl: string;
+  social: {
+    facebook: string;
+    instagram: string;
+    youtube: string;
+    linkedin: string;
+  };
+}
+
+export interface OrganizationInfo {
+  name: string;
+  tagline: string;
+  mission: string;
+  contactEmail: string;
+  contactPhone: string;
+  serviceArea: string;
+  taxId: string;
 }
 
 export interface AuthUser {
