@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 
 interface ButtonProps {
   children: React.ReactNode;
-  variant?: 'primary' | 'secondary' | 'outline' | 'white';
+  variant?: 'primary' | 'secondary' | 'outline' | 'white' | 'sunshine' | 'inverse';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   onClick?: () => void;
@@ -20,6 +20,10 @@ const variantStyles: Record<string, string> = {
     'border-2 border-brand-plum bg-transparent text-brand-plum hover:-translate-y-0.5 hover:bg-brand-plum hover:text-white',
   white:
     'border-2 border-white bg-white text-brand-plum hover:-translate-y-0.5 hover:bg-brand-cream',
+  sunshine:
+    'border-2 border-brand-sunshine bg-brand-sunshine text-brand-plum-dark shadow-[0_8px_0_rgba(244,185,66,.18)] hover:-translate-y-0.5 hover:border-[#ffd06a] hover:bg-[#ffd06a]',
+  inverse:
+    'border-2 border-white/70 bg-white/10 text-white shadow-[0_8px_0_rgba(255,255,255,.08)] backdrop-blur-sm hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-brand-plum',
 };
 
 const sizeStyles: Record<string, string> = {

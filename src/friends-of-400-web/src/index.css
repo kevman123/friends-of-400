@@ -129,6 +129,37 @@ main:focus {
   background-size: 18px 18px;
 }
 
+.hero-surface {
+  background-color: var(--color-brand-plum-dark);
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(66, 165, 216, 0.42), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(233, 103, 143, 0.34), transparent 32%),
+    radial-gradient(circle at 72% 100%, rgba(121, 184, 74, 0.25), transparent 35%),
+    linear-gradient(125deg, #3f1b49 0%, #52255f 52%, #255831 100%);
+}
+
+.hero-light-dots {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.3) 1.5px, transparent 1.5px);
+  background-size: 18px 18px;
+}
+
+.site-header-surface {
+  background-color: rgba(255, 248, 236, 0.97);
+  background-image:
+    radial-gradient(circle at 4% -120%, rgba(66, 165, 216, 0.2), transparent 28%),
+    radial-gradient(circle at 95% -140%, rgba(244, 185, 66, 0.22), transparent 30%),
+    linear-gradient(100deg, rgba(255, 255, 255, 0.78), rgba(255, 248, 236, 0.94));
+  backdrop-filter: blur(18px);
+}
+
+.mobile-nav-surface {
+  background-color: var(--color-brand-plum-dark);
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(233, 103, 143, 0.28), transparent 32%),
+    radial-gradient(circle at 0% 72%, rgba(66, 165, 216, 0.2), transparent 38%),
+    linear-gradient(155deg, #52255f 0%, #3f1b49 62%, #255831 120%);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

@@ -56,7 +56,7 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   return (
     <div className="fixed inset-0 z-50 lg:hidden">
       <div
-        className="fixed inset-0 cursor-default bg-brand-ink/55"
+        className="fixed inset-0 cursor-default bg-brand-ink/70 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -66,24 +66,31 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="mobile-navigation-title"
-        className="fixed bottom-0 right-0 top-0 flex w-[min(88vw,22rem)] flex-col overflow-y-auto bg-brand-cream p-6 shadow-2xl"
+        className="mobile-nav-surface fixed bottom-0 right-0 top-0 flex w-[min(88vw,22rem)] flex-col overflow-y-auto border-l border-white/10 p-6 text-white shadow-2xl"
       >
         <div className="flex items-start justify-between gap-4">
-          <div>
-            <Logo variant="mark" className="h-16 w-16" />
-            <h2 id="mobile-navigation-title" className="mt-2 text-2xl font-semibold text-brand-plum">
-              Explore
-            </h2>
+          <div className="flex items-center gap-3">
+            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-white shadow-xl">
+              <Logo variant="mark" className="h-14 w-14" />
+            </span>
+            <div>
+              <p className="text-xs font-black uppercase tracking-[0.15em] text-brand-sunshine">
+                Friends of 400
+              </p>
+              <h2 id="mobile-navigation-title" className="mt-1 text-2xl font-semibold text-white">
+                Explore
+              </h2>
+            </div>
           </div>
-        <button
-          ref={closeButtonRef}
-          type="button"
-          onClick={onClose}
-            className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border-2 border-brand-plum/20 bg-white text-3xl leading-none text-brand-plum"
-          aria-label="Close navigation menu"
-        >
-          &times;
-        </button>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={onClose}
+            className="inline-flex min-h-12 min-w-12 items-center justify-center rounded-full border-2 border-white/20 bg-white/10 text-3xl leading-none text-white transition hover:border-white/45 hover:bg-white/20"
+            aria-label="Close navigation menu"
+          >
+            &times;
+          </button>
         </div>
 
         <nav className="mt-8 flex flex-col gap-2" aria-label="Mobile navigation">
@@ -92,8 +99,10 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
             end
             onClick={onClose}
             className={({ isActive }) =>
-              `rounded-2xl px-4 py-3 text-lg font-bold no-underline ${
-                isActive ? 'bg-brand-plum text-white' : 'text-brand-ink hover:bg-white'
+              `rounded-2xl px-4 py-3 text-lg font-bold no-underline transition ${
+                isActive
+                  ? 'bg-brand-sunshine text-brand-plum shadow-lg'
+                  : 'text-white/85 hover:bg-white/10 hover:text-white'
               }`
             }
           >
@@ -105,22 +114,37 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
               to={item.to}
               onClick={onClose}
               className={({ isActive }) =>
-                `rounded-2xl px-4 py-3 text-lg font-bold no-underline ${
-                  isActive ? 'bg-brand-plum text-white' : 'text-brand-ink hover:bg-white'
+                `rounded-2xl px-4 py-3 text-lg font-bold no-underline transition ${
+                  isActive
+                    ? 'bg-brand-sunshine text-brand-plum shadow-lg'
+                    : 'text-white/85 hover:bg-white/10 hover:text-white'
                 }`
               }
             >
               {item.label}
             </NavLink>
           ))}
-          <Button href="/donate" onClick={onClose} className="mt-3 w-full">
+          <Button
+            href="/donate"
+            variant="sunshine"
+            onClick={onClose}
+            className="mt-4 w-full"
+          >
             Donate
           </Button>
         </nav>
 
-        <p className="mt-auto pt-10 text-sm leading-relaxed text-brand-ink/70">
-          Planting strong roots through education, scouting, sports, and community support.
-        </p>
+        <div className="mt-auto pt-10">
+          <div className="mb-5 flex gap-2" aria-hidden="true">
+            <span className="h-2.5 w-10 rounded-full bg-brand-sky" />
+            <span className="h-2.5 w-10 rounded-full bg-brand-sunshine" />
+            <span className="h-2.5 w-10 rounded-full bg-brand-coral" />
+            <span className="h-2.5 w-10 rounded-full bg-brand-leaf" />
+          </div>
+          <p className="text-sm leading-relaxed text-white/65">
+            Planting strong roots through education, scouting, sports, and community support.
+          </p>
+        </div>
       </div>
     </div>
   );
